@@ -54,6 +54,10 @@ This repository contains coursework and projects for the GPU Programming Special
 
 ### Kernel Launch Template
 ```cuda
+// Define block size (threads per block)
+#define BLOCK_SIZE 256
+
+// N is the total number of elements to process
 // Calculate grid and block dimensions
 dim3 blockDim(BLOCK_SIZE);
 dim3 gridDim((N + BLOCK_SIZE - 1) / BLOCK_SIZE);
