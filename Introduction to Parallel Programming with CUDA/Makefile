@@ -1,8 +1,8 @@
 IDIR=./
-COMPILER=REPLACE_WITH_NVIDIA_CROSS_COMPILER
+COMPILER=nvcc
 COMPILER_FLAGS=-I$(IDIR) -I/usr/local/cuda/include -lcuda --std c++17
 
-.PHONY: clean build run
+. PHONY: clean build run
 
 build: simple.cu simple.h
 	$(COMPILER) $(COMPILER_FLAGS) simple.cu -o simple.exe
