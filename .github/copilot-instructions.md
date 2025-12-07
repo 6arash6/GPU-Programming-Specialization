@@ -74,20 +74,30 @@ if (err != cudaSuccess) {
 
 ### Memory Management Pattern
 ```cuda
+// Host arrays
+float *h_data = (float*)malloc(size * sizeof(float));
+float *h_result = (float*)malloc(size * sizeof(float));
+
 // Allocate device memory
-float *d_data;
+float *d_data, *d_result;
 cudaMalloc(&d_data, size * sizeof(float));
+cudaMalloc(&d_result, size * sizeof(float));
 
 // Copy data to device
 cudaMemcpy(d_data, h_data, size * sizeof(float), cudaMemcpyHostToDevice);
 
-// [Perform GPU operations]
+// [Perform GPU operations on d_data, store results in d_result]
 
 // Copy results back to host
 cudaMemcpy(h_result, d_result, size * sizeof(float), cudaMemcpyDeviceToHost);
 
 // Free device memory
 cudaFree(d_data);
+cudaFree(d_result);
+
+// Free host memory
+free(h_data);
+free(h_result);
 ```
 
 ## Academic Integrity
